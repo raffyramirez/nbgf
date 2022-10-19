@@ -1,0 +1,24 @@
+rem --------------------------------------------------------------------------
+rem NAME         : nbgf_returned_seqnos.cons
+rem AUTHOR       : Raffy Ramirez (full name: Rafael Santos Ramirez)
+rem DESCRIPTION  : Non-Blocking Gap-Free sequence table constraints script
+rem                see https://github.com/raffyramirez/nbgf
+rem REQUIREMENTS : nbgf_returned_seqnos.tab
+rem LICENSE      : MIT license - Free for personal and commercial use.
+rem                You can change the code, but leave existing the headers,
+rem                modification history and links intact.
+rem HISTORY      : (author dev names: rramirez, rsramirez)
+rem When         Who       What
+rem ===========  ========  =================================================
+rem 2019-JAN-03  rramirez  ported to 18c from old 7,8i and 9i code
+rem --------------------------------------------------------------------------
+
+ALTER TABLE nbgf_returned_seqnos
+  MODIFY (seqname CONSTRAINT nbgf_returned_seqnos_nn1 NOT NULL ENABLE);
+ALTER TABLE nbgf_returned_seqnos
+  MODIFY (seqno CONSTRAINT nbgf_returned_seqnos_nn2 NOT NULL ENABLE);
+ALTER TABLE nbgf_returned_seqnos
+  ADD CONSTRAINT nbgf_returned_seqnos_pk
+  UNIQUE (seqname, seqno)
+  USING INDEX;
+

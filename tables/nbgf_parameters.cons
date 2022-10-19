@@ -1,0 +1,51 @@
+rem --------------------------------------------------------------------------
+rem NAME         : nbgf_parameters.cons
+rem AUTHOR       : Raffy Ramirez (full name: Rafael Santos Ramirez)
+rem DESCRIPTION  : Non-Blocking Gap-Free sequence table constraints script
+rem                see https://github.com/raffyramirez/nbgf
+rem REQUIREMENTS : nbgf_parameters.tab
+rem LICENSE      : MIT license - Free for personal and commercial use.
+rem                You can change the code, but leave existing the headers,
+rem                modification history and links intact.
+rem HISTORY      : (author dev names: rramirez, rsramirez)
+rem When         Who       What
+rem ===========  ========  =================================================
+rem 2019-JAN-03  rramirez  ported to 18c from old 7,8i and 9i code
+rem --------------------------------------------------------------------------
+
+ALTER TABLE nbgf_parameters
+  MODIFY (seqname CONSTRAINT nbgf_parameters_nn1 NOT NULL ENABLE);
+ALTER TABLE nbgf_parameters
+  MODIFY (cache_size CONSTRAINT nbgf_parameters_nn2 NOT NULL ENABLE);
+ALTER TABLE nbgf_parameters
+  MODIFY (max_retry CONSTRAINT nbgf_parameters_nn3 NOT NULL ENABLE);
+ALTER TABLE nbgf_parameters
+  MODIFY (retry_wait CONSTRAINT nbgf_parameters_nn4 NOT NULL ENABLE);
+ALTER TABLE nbgf_parameters
+  MODIFY (start_with CONSTRAINT nbgf_parameters_nn5 NOT NULL ENABLE);
+ALTER TABLE nbgf_parameters
+  MODIFY (increment_by CONSTRAINT nbgf_parameters_nn6 NOT NULL ENABLE);
+ALTER TABLE nbgf_parameters
+  MODIFY (ordered CONSTRAINT nbgf_parameters_nn7 NOT NULL ENABLE);
+ALTER TABLE nbgf_parameters
+  MODIFY (disabled CONSTRAINT nbgf_parameters_nn8 NOT NULL ENABLE);
+ALTER TABLE nbgf_parameters
+  ADD CONSTRAINT nbgf_parameters_pk
+  PRIMARY KEY (seqname)
+  USING INDEX;
+ALTER TABLE nbgf_parameters
+  ADD CONSTRAINT nbgf_parameters_c1
+  CHECK (cache_size >= 2);
+ALTER TABLE nbgf_parameters
+  ADD CONSTRAINT nbgf_parameters_c2
+  CHECK (max_retry >= 2);
+ALTER TABLE nbgf_parameters
+  ADD CONSTRAINT nbgf_parameters_c3
+  CHECK (retry_wait >= 0);
+ALTER TABLE nbgf_parameters
+  ADD CONSTRAINT nbgf_parameters_c4
+  CHECK (ordered IN (0,1));
+ALTER TABLE nbgf_parameters
+  ADD CONSTRAINT nbgf_parameters_c5
+  CHECK (disabled IN (0,1));
+

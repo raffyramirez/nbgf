@@ -1,0 +1,20 @@
+rem --------------------------------------------------------------------------
+rem NAME         : nbgf_seqnos_cache.tab
+rem AUTHOR       : Raffy Ramirez (full name: Rafael Santos Ramirez)
+rem DESCRIPTION  : Non-Blocking Gap-Free sequence create table script
+rem                see https://github.com/raffyramirez/nbgf
+rem REQUIREMENTS : none
+rem LICENSE      : MIT license - Free for personal and commercial use.
+rem                You can change the code, but leave existing the headers,
+rem                modification history and links intact.
+rem HISTORY      : (author dev names: rramirez, rsramirez)
+rem When         Who       What
+rem ===========  ========  =================================================
+rem 2019-JAN-03  rramirez  ported to 18c from old 7,8i and 9i code
+rem --------------------------------------------------------------------------
+
+CREATE TABLE nbgf_seqnos_cache (
+  seqname VARCHAR2(30),
+  seqno NUMBER
+);
+

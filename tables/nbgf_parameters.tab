@@ -1,0 +1,27 @@
+rem --------------------------------------------------------------------------
+rem NAME         : nbgf_parameters.tab
+rem AUTHOR       : Raffy Ramirez (full name: Rafael Santos Ramirez)
+rem DESCRIPTION  : Non-Blocking Gap-Free sequence create table script
+rem                see https://github.com/raffyramirez/nbgf
+rem REQUIREMENTS : none
+rem LICENSE      : MIT license - Free for personal and commercial use.
+rem                You can change the code, but leave existing the headers,
+rem                modification history and links intact.
+rem HISTORY      : (author dev names: rramirez, rsramirez)
+rem When         Who       What
+rem ===========  ========  =================================================
+rem 2019-JAN-03  rramirez  ported to 18c from old 7,8i and 9i code
+rem --------------------------------------------------------------------------
+
+CREATE TABLE nbgf_parameters (
+  seqname VARCHAR2(30),
+  cache_size NUMBER(2) DEFAULT 10, -- min 2 
+  max_retry NUMBER(2) DEFAULT 5, -- >= 2 
+  retry_wait NUMBER(2) DEFAULT 1, -- sleep seconds, >= 0 
+  start_with NUMBER(6) DEFAULT 1, -- >= 1
+  increment_by NUMBER(6) DEFAULT 1, -- >= 1
+  max_value NUMBER(6), -- NULL for no limit
+  disabled NUMBER(1) DEFAULT 0, -- 0=false, 1=true
+  ordered NUMBER(1) DEFAULT 0 -- 0=false, 1=true
+);
+

@@ -1,0 +1,35 @@
+rem --------------------------------------------------------------------------
+rem NAME         : nbgf_sequence_info.vew
+rem AUTHOR       : Raffy Ramirez (full name: Rafael Santos Ramirez)
+rem DESCRIPTION  : Non-Blocking Gap-Free sequence create view
+rem                see https://github.com/raffyramirez/nbgf
+rem REQUIREMENTS : nbgf tables
+rem LICENSE      : MIT license - Free for personal and commercial use.
+rem                You can change the code, but leave existing the headers,
+rem                modification history and links intact.
+rem HISTORY      : (author dev names: rramirez, rsramirez)
+rem When         Who       What
+rem ===========  ========  =================================================
+rem 2019-JAN-03  rramirez  ported to 18c from old 7,8i and 9i code
+rem --------------------------------------------------------------------------
+
+CREATE OR REPLACE
+VIEW nbgf_sequence_info
+AS
+SELECT A.seqname,
+       A.seqno last_value,
+       B.start_with,
+       B.increment_by,
+       B.max_value,
+       B.ordered,
+       B.cache_size,
+       B.max_retry,
+       B.retry_wait,
+       B.disabled,
+       (SELECT COUNT(*)
+          FROM nbgf_seqnos_cache
+         WHERE seqname = A.seqname) cache_count
+  FROM nbgf_sequences A,
+       nbgf_parameters B
+ WHERE A.seqname = B.seqname;
+
